@@ -23,6 +23,19 @@
     "eol-last": 0,
     "no-underscore-dangle": 0,
     "no-console": 0,
-    "no-alert": 0
-  }
+    "no-alert": 0,
+    "strict": [2, "never"],
+    "babel/generator-star-spacing": 1,
+    "babel/new-cap": 1,
+    "babel/object-shorthand": 1,
+    "babel/arrow-parens": 1,
+    "babel/no-await-in-loop": 1,
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2
+  },
+  "plugins": [
+    "babel",
+    "react"
+  ]
 }
