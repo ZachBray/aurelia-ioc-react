@@ -1,8 +1,7 @@
-/* @flow */
-
+/// <reference path="../typings/tsd.d.ts" />
+import * as chai from 'chai';
 import Calculator from '../src/calculator';
-import {describe, it} from 'mocha';
-import {expect} from 'chai';
+const expect = chai.expect;
 
 describe('Adding', () => {
   it('should be commutative', () => {

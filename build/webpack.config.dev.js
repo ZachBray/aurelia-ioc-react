@@ -1,11 +1,12 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'eventsource-polyfill', // necessary for hot reloading with IE
     'webpack-hot-middleware/client',
-    './src/index'
+    './src/index.tsx'
   ],
   output: require('./webpack.output'),
   plugins: [
@@ -14,5 +15,6 @@ module.exports = {
   ],
   module: {
     loaders: require('./webpack.loaders')
-  }
+  },
+  resolve: require('./webpack.resolve')
 };

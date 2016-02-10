@@ -1,9 +1,10 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   devtool: 'source-map',
   entry: [
-    './src/index'
+    './src/index.tsx'
   ],
   output: require('./webpack.output'),
   plugins: [
@@ -21,5 +22,6 @@ module.exports = {
   ],
   module: {
     loaders: require('./webpack.loaders')
-  }
+  },
+  resolve: require('./webpack.resolve')
 };
