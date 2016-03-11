@@ -12,7 +12,11 @@ module.exports = function(config) {
     singleRun: true,
     webpack: require('./webpack.config.test'),
     webpackServer: {
-      noInfo: true
+      noInfo: true,
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+      }
     }
   });
 };

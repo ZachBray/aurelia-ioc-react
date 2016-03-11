@@ -33,10 +33,9 @@
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-switch-case-fall-through": true,
-    "no-trailing-comma": false,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-unused-variable": true,
+    "no-unused-variable": [true, "react"],
     "no-unreachable": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
@@ -51,6 +50,6 @@
     "radix": true,
     "semicolon": true,
     "triple-equals": [true, "allow-null-check"],
-    "variable-name": false,
+    "variable-name": false
   }
 }

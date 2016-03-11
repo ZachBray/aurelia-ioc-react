@@ -21,7 +21,9 @@ module.exports = {
     })
   ],
   module: {
-    loaders: require('./webpack.loaders')
+    loaders: require('./webpack.loaders'),
+    preLoaders: require('./webpack.preloaders')
   },
-  resolve: require('./webpack.resolve')
+  resolve: require('./webpack.resolve'),
+  ts: require('./webpack.ts.config')
 };

@@ -1,4 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
 import * as chai from 'chai';
 import Calculator from '../src/calculator';
 const expect = chai.expect;
