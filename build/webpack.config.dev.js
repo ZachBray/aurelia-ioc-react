@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+var vendorChunkPlugin = require('./webpack.vendor.chunk.plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -11,7 +11,8 @@ module.exports = {
   output: require('./webpack.output'),
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    vendorChunkPlugin
   ],
   module: {
     loaders: require('./webpack.loaders'),

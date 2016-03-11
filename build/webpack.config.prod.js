@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+var vendorChunkPlugin = require('./webpack.vendor.chunk.plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -18,7 +18,8 @@ module.exports = {
       compressor: {
         warnings: false
       }
-    })
+    }),
+    vendorChunkPlugin
   ],
   module: {
     loaders: require('./webpack.loaders'),

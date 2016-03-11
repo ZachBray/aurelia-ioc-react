@@ -2,7 +2,7 @@ module.exports = function(config) {
   config.set({
     browsers: ['PhantomJS'],
     files: [
-      { pattern: 'tests.webpack.js', watched: false },
+      'tests.webpack.js'
     ],
     frameworks: ['mocha', 'chai'],
     preprocessors: {
@@ -10,6 +10,7 @@ module.exports = function(config) {
     },
     reporters: ['dots'],
     singleRun: true,
+    autoWatch: true,
     webpack: require('./webpack.config.test'),
     webpackServer: {
       noInfo: true,
