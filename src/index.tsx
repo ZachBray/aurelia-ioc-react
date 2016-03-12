@@ -1,6 +1,33 @@
-import * as React from 'react';
+/// <reference path="../node_modules/aurelia-pal/dist/aurelia-pal.d.ts" />
+/// <reference path="../node_modules/aurelia-metadata/dist/aurelia-metadata.d.ts" />
+/// <reference path="../node_modules/aurelia-dependency-injection/dist/aurelia-dependency-injection.d.ts" />
+import 'aurelia-polyfills';
+import * as _ from 'lodash';
+import {Container} from 'aurelia-dependency-injection';
+import {IRootController} from './core/IRootController';
 import {render} from 'react-dom';
-import App from './app';
 import 'file?name=[name].[ext]!./index.html';
 
-render(<App />, document.getElementById('root'));
+bootstrapApplication();
+
+function bootstrapApplication() {
+  const container = bootstrapContainer();
+  const rootController = container.get(IRootController);
+  render(rootController.getView(), document.getElementById('root'));
+}
+
+
+function bootstrapContainer() {
+  const container = new Container();
+  const serviceExports = getContainerExports();
+  container.autoRegisterAll(serviceExports);
+  return container;
+}
+
+function getContainerExports() {
+  const requireContext = require.context('./modules', true, /^\.\/.*\.tsx?$/);
+  const moduleObjects = requireContext.keys().map(requireContext);
+  const moduleExports = _.flatten(moduleObjects.map(moduleObject => Object.keys(moduleObject).map(k => moduleObject[k])));
+  const serviceExports = moduleExports.filter(moduleExport => moduleExport.inject !== undefined);
+  return serviceExports;
+}
