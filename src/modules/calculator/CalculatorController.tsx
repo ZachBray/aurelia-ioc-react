@@ -1,18 +1,21 @@
-import * as React from 'react';
+import * as Rx from 'rx';
 import {transient, autoinject} from 'aurelia-dependency-injection';
-import {ICalculatorController} from './ICalculatorController';
 import {IRootController} from '../../core/IRootController';
-import {ICalculatorModel} from './ICalculatorModel';
-import {CalculatorView} from './CalculatorView';
+import {ICalculatorModel} from './CalculatorModel';
+import {ICalculatorView} from './CalculatorView';
+
+export abstract class ICalculatorController {
+  view$: Rx.IObservable<any>;
+}
 
 @transient(IRootController)
 @autoinject()
 export class CalculatorController implements ICalculatorController, IRootController {
-  constructor(private calculator: ICalculatorModel) {
+  constructor(private calculator: ICalculatorModel, private view: ICalculatorView) {
   }
 
-  getView() {
+  view$ = Rx.Observable.defer(() => {
     const result = this.calculator.add(2, 2);
-    return <CalculatorView result={result} />;
-  }
+    return Rx.Observable.return(this.view.render({result}));
+  });
 }

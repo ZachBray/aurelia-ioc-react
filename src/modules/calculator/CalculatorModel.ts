@@ -1,5 +1,8 @@
 import {transient, autoinject} from 'aurelia-dependency-injection';
-import {ICalculatorModel} from './ICalculatorModel';
+
+export abstract class ICalculatorModel {
+  abstract add(x: number, y: number): number;
+}
 
 @transient(ICalculatorModel)
 @autoinject()

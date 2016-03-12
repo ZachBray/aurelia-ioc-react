@@ -1,3 +1,3 @@
 export abstract class IRootController {
-  abstract getView(): any;
+  view$: Rx.IObservable<any>;
 }

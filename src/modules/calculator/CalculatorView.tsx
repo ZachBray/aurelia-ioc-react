@@ -1,7 +1,14 @@
 import * as React from 'react';
+import {transient, autoinject} from 'aurelia-dependency-injection';
 
-export class CalculatorView extends React.Component<{result: number}, {}> {
-  render() {
-    return <div>{this.props.result}</div>;
+export abstract class ICalculatorView {
+  abstract render(props: {result: number}): any;
+}
+
+@transient(ICalculatorView)
+@autoinject()
+export class CalculatorView implements ICalculatorView {
+  render({result}) {
+    return <div>{result}</div>;
   }
 }
