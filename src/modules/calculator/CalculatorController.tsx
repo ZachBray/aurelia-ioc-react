@@ -1,16 +1,15 @@
 import * as Rx from 'rx';
 import {transient, autoinject} from 'aurelia-dependency-injection';
-import {IRootController} from '../../core/IRootController';
 import {ICalculatorModel} from './CalculatorModel';
 import {ICalculatorView} from './CalculatorView';
 
 export abstract class ICalculatorController {
-  view$: Rx.IObservable<any>;
+  view$: Rx.Observable<any>;
 }
 
-@transient(IRootController)
+@transient(ICalculatorController)
 @autoinject()
-export class CalculatorController implements ICalculatorController, IRootController {
+export class CalculatorController implements ICalculatorController {
   constructor(private calculator: ICalculatorModel, private view: ICalculatorView) {
   }
 

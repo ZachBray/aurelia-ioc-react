@@ -6,8 +6,8 @@ import 'aurelia-polyfills';
 import * as _ from 'lodash';
 import * as React from 'react';
 import {Container} from 'aurelia-dependency-injection';
-import {IRootController} from './core/IRootController';
-import {RootPresenter} from './core/RootPresenter';
+import {IShellController} from './modules/shell/components/ShellController';
+import {ObservableViewPresenter} from './utils/ObservableViewPresenter';
 import {render} from 'react-dom';
 import 'file?name=[name].[ext]!./index.html';
 
@@ -15,8 +15,8 @@ bootstrapApplication();
 
 function bootstrapApplication() {
   const container = bootstrapContainer();
-  const rootController = container.get(IRootController);
-  render(<RootPresenter view$={rootController.view$} />, document.getElementById('root'));
+  const rootController = container.get(IShellController);
+  render(<ObservableViewPresenter view$={rootController.view$} />, document.getElementById('root'));
 }
 
 
