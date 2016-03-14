@@ -9,4 +9,7 @@ module.exports = [{
   test: /\.html/,
   loaders: ['file'],
   exclude: [modulesDir]
+}, {
+  test: /\.css/,
+  loaders: ['style', 'css']
 }];

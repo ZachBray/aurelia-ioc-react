@@ -24,7 +24,7 @@ export class ShellController implements IShellController {
     this.intentSubscription.setDisposable(launcher.launchedIntents$.subscribe(intent => this.handleIntent(intent)));
 
     this.view$ = Rx.Observable.combineLatest(launcher.view$, layout.view$,
-      (launcherView, layoutView) => view.render({launcherView, layoutView})).do(() => console.log('shell'));
+      (launcherView, layoutView) => view.render({launcherView, layoutView}));
   }
 
   dispose() {
