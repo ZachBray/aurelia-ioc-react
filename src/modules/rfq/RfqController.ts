@@ -1,7 +1,7 @@
 import * as Rx from 'rx';
 import {transient, autoinject} from 'aurelia-dependency-injection';
 import {IRfqView} from './RfqView';
-import {IFormController} from '../forms/components/form/FormController';
+import {IFormController} from '../forms/components/object-input/ObjectController';
 
 export abstract class IRfqController {
   view$: Rx.Observable<any>;

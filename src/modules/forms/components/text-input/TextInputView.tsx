@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {Textfield} from 'react-mdl';
+import TextField from 'material-ui/lib/text-field';
 import {transient, autoinject} from 'aurelia-dependency-injection';
+import {ITextFieldSchema} from "../../domain/IFormSchema";
 
 export abstract class ITextInputView {
   abstract render(props: {
-    label: string,
     value: string,
+    error: string,
+    schema: ITextFieldSchema,
     onChange: (value: string) => void;
   }): any;
 }
@@ -13,10 +15,11 @@ export abstract class ITextInputView {
 @transient(ITextInputView)
 @autoinject()
 export class TextInputView implements ITextInputView {
-  render({label, value, onChange}) {
-    return <Textfield label={label} 
-                      floatingLabel={true}
-                      value={value} 
+  render({value, error, schema, onChange}) {
+    return <TextField floatingLabelText={schema.label}
+                      hintText={schema.hint}
+                      errorText={error}
+                      value={value}
                       onChange={e => onChange(e.target.value)} />;
   }
 }

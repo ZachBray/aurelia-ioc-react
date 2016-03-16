@@ -1,36 +1,19 @@
 import * as Rx from 'rx';
-import {transient, autoinject} from 'aurelia-dependency-injection';
+import {inject} from 'aurelia-dependency-injection';
 import {ITextInputView} from './TextInputView';
+import {ITextFieldSchema} from "../../domain/IFormSchema";
+import {IValidator} from "../../domain/IValidator";
+import {IFormController} from "../IFormController";
 
-export abstract class ITextInputController {
-  view$: Rx.Observable<any>;
-  value$: Rx.Observable<string>;
-  abstract setLabel(label: string);
-  abstract setValue(value: string);
-}
+@inject(ITextInputView)
+export class TextInputController implements IFormController {
+  private text$ = new Rx.BehaviorSubject<string>('');
 
-@transient(ITextInputController)
-@autoinject()
-export class TextInputController implements ITextInputController {
-  private state$ = new Rx.BehaviorSubject<{value: string, label: string}>({
-    value: '',
-    label: ''
-  });
+  constructor(private view: ITextInputView, private schema: ITextFieldSchema, private validator: IValidator) { }
 
-  constructor(private view: ITextInputView) { }
-
-  view$ = this.state$.map(({value, label}) => this.view.render({value, label, onChange: value => this.setValue(value)}));
-  value$ = this.state$.map(({value}) => value);
-
-  setValue(value: string) {
-    const {label} = this.state$.getValue();
-    const newState = {label, value};
-    this.state$.onNext(newState);
-  }
-
-  setLabel(label: string) {
-    const {value} = this.state$.getValue();
-    const newState = {label, value};
-    this.state$.onNext(newState);
-  }
+  private error$ = this.text$.map(value => this.validator.validate({value, areSubFormsValid: true}));
+  view$ = Rx.Observable.combineLatest(this.text$, this.error$,
+    (value, error) => this.view.render({value, error, schema: this.schema, onChange: value => this.text$.onNext(value)}));
+  value$ = this.text$.asObservable();
+  isValid$ = this.error$.map(error => error === undefined);
 }

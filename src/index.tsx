@@ -10,8 +10,6 @@ import {IShellController} from './modules/shell/components/ShellController';
 import {ObservableViewPresenter} from './utils/ObservableViewPresenter';
 import {render} from 'react-dom';
 import 'file?name=[name].[ext]!./index.html';
-import 'react-mdl/extra/material.js';
-import 'react-mdl/extra/material.css';
 
 bootstrapApplication();
 
